@@ -48,7 +48,7 @@ Then, update your `.babelrc` file:
 [npm-img]: https://img.shields.io/npm/v/@darkobits/ng-inject-decorator.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/@darkobits/ng-inject-decorator
 
-[codacy-img]: https://img.shields.io/codacy/coverage/0023b07bb2454f2a8c336f92814f09a0.svg?style=flat-square
+[codacy-img]: https://img.shields.io/codacy/coverage/8cf3c53ed5124385964e7d053cb90e82.svg?style=flat-square
 [codacy-url]: https://www.codacy.com/app/darkobits/ng-inject-decorator
 
 [xo-img]: https://img.shields.io/badge/code_style-XO-e271a5.svg?style=flat-square
