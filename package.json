@@ -28,7 +28,7 @@
     "babel-plugin-transform-decorators-legacy": "1.x"
   },
   "dependencies": {
-    "@darkobits/class-decorator": "2.x",
+    "@darkobits/class-decorator": "3.x",
     "ramda": "0.24.x"
   },
   "devDependencies": {

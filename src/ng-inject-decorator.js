@@ -55,39 +55,22 @@ function traversePrototypeChain(callback, ctorOrProto) {
  * @return {function}
  */
 export default function inject(...dependencies) {
-  // Ensure we were provided a list of strings.
-  dependencies.forEach(dependency => {
-    if (typeof dependency !== 'string') {
-      throw new TypeError(`[Inject] Expected dependency to be of type "String", got: ${typeof dependency}.`);
-    }
-  });
-
   return classDecorator(decoratedClass => {
-    let ancestorDependencies = [];
+    let $inject = dependencies || [];
 
     traversePrototypeChain(proto => {
-      // Read the $inject key of each constructor in the prototype chain.
-      ancestorDependencies = ancestorDependencies.concat(proto.constructor.$inject || []);
+      $inject = unique($inject, proto.constructor.$inject);
     }, decoratedClass.prototype);
 
-    class AngularDI {
-      constructor(...args) {
-        // If we were invoked with the name number of arguments as items in our
-        // $inject key, it means we are decorating the class being instantiated,
-        // and should handle attaching dependencies. Otherwise, it means we are
-        // an ancestor of the class being instantiated and should pass.
-        if (AngularDI.$inject.length === args.length) {
-          AngularDI.$inject.forEach((name, index) => {
-            this[name] = args[index];
-          });
-        }
+    return {
+      onConstruct(...args) {
+        $inject.forEach((name, index) => {
+          this[name] = args[index];
+        });
+      },
+      static: {
+        $inject
       }
-    }
-
-    // Set our own $inject key to the unique set of all direct and ancestor
-    // dependencies so that Angular will provide all of them upon instantiation.
-    AngularDI.$inject = unique(dependencies, ancestorDependencies);
-
-    return AngularDI;
+    };
   });
 }
