@@ -2,7 +2,7 @@
 
 # ng-inject-decorator
 
-...
+This package provides a [decorator](https://github.com/tc39/proposal-decorators) which can be used to make [dependency injection](https://docs.angularjs.org/guide/di) with [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) easier.
 
 ## Installation
 
@@ -28,13 +28,126 @@ Then, update your `.babelrc` file:
 }
 ```
 
+## Features
+
+- Classes express their dependencies in a single place, without incurring constructor bloat.
+- Providing dependencies to parent classes is trivial.
+- Parent classes and child classes that use the same dependency can (and should) declare it; `inject` will take care of de-duping for you.
+
 ## Usage
 
-...
+#### `default(...dependencies: Array<string>): function`
+
+This package's default export is a function that accepts an arbitrary number of string arguments representing dependencies to be injected into the decorated class upon instantiation, and returns a decorator function.
 
 ### Example
 
-...
+First, let's look at how dependency injection is typically handled in Angular 1 when using classes:
+
+```js
+import angular from 'angular';
+
+class MyCtrl {
+  // 1. Declare dependencies as constructor arguments.
+  constructor ($document, $http, $q) {
+    // 2. Attach each dependency to the instance.
+    this.$document = $document;
+    this.$http = $http;
+    this.$q = $q;
+  }
+
+  someMethod () {
+    // 3. Use dependencies in controller methods.
+    this.$http({
+      // ...
+    });
+  }
+}
+
+angular.module('MyApp').component({
+  controller: MyCtrl,
+  // ...
+});
+```
+
+This approach is fairly verbose because it requires each additional dependency be added as a constructor argument and then manually attached to the controller instance in the constructor.
+
+Another problem with this approach is that `extend`-ing a parent class that may also need to use dependency injection is awkward:
+
+> `ParentCtrl.js`
+
+```js
+export default class ParentCtrl {
+  // Some method that needs $element.
+  parentMethod () {
+    this.$element; // ...
+  }
+}
+```
+
+> `MyComponent.js`
+
+```js
+import angular from 'angular';
+import ParentCtrl from './ParentCtrl.js';
+
+class MyCtrl extends ParentCtrl {
+  constructor ($document, $element, $http, $q) {
+    this.$document = $document;
+    this.$http = $http;
+    this.$q = $q;
+
+    // MyCtrl needs to declare $element as a dependency, even though it doesn't
+    // use it directly, so that ParentCtrl will have access to it. Meanwhile,
+    // ParentCtrl must assume that classes that extend it will declare $element
+    // as a dependency.
+    this.$element = $element;
+  }
+
+  // Implement methods that use $document, $http, $q...
+}
+
+angular.module('MyApp').component({
+  controller: MyCtrl,
+  // ...
+});
+```
+
+Let's see how we can improve this with the `inject` decorator:
+
+> `ParentCtrl.js`
+
+```js
+import inject from '@darkobits/ng-inject-decorator';
+
+@inject('$element')
+export default class ParentCtrl {
+  // Some method that needs $element.
+  parentMethod () {
+    this.$element; // ...
+  }
+}
+```
+
+> `MyComponent.js`
+
+```js
+import ParentCtrl from './ParentCtrl.js';
+
+@inject('$document', '$http', '$q')
+class MyCtrl extends ParentCtrl {
+  myMethod () {
+    // Do something with this.$document, this.$http, this.$q...
+  }
+}
+
+angular.module('MyApp').component({
+  controller: MyCtrl,
+  // ...
+});
+```
+
+_Wowza!_ We did such a good job of reducing constructor bloat that we were able to eliminate them entirely!
 
 ## &nbsp;
 <p align="center">
