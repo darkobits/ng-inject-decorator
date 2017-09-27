@@ -1,6 +1,6 @@
 {
   "name": "@darkobits/ng-inject-decorator",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "Dependency injector for classes with Angular 1.",
   "contributors": [
     {
