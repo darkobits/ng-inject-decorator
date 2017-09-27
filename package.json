@@ -32,7 +32,9 @@
     "ramda": "0.24.x"
   },
   "devDependencies": {
+    "@darkobits/unity": "1.x",
     "angular": "1.6.x",
+    "angular-mocks": "1.6.x",
     "babel-cli": "6.x",
     "babel-core": "6.x",
     "babel-eslint": "8.x",
