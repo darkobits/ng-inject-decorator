@@ -40,6 +40,16 @@ Then, update your `.babelrc` file:
 
 This package's default export is a function that accepts an arbitrary number of string arguments representing dependencies to be injected into the decorated class upon instantiation, and returns a decorator function.
 
+#### **Parameters:**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `dependencies` | `[String]` | Argument list of dependencies to inject. |
+
+#### **Returns:**
+
+`function` - Decorator function.
+
 ### Example
 
 First, let's look at how dependency injection is typically handled in Angular 1 when using classes:
