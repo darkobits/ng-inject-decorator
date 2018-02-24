@@ -1,6 +1,6 @@
-[![][travis-img]][travis-url] [![][npm-img]][npm-url] [![][codacy-img]][codacy-url] [![][xo-img]][xo-url] [![][cc-img]][cc-url]
+![ng-inject](https://user-images.githubusercontent.com/441546/36626804-333bbac2-18ee-11e8-9d38-91057a24e785.png)
 
-# ng-inject-decorator
+[![][npm-img]][npm-url] [![][travis-img]][travis-url] [![][codacy-img]][codacy-url] [![][cc-img]][cc-url] [![][xo-img]][xo-url]
 
 This package provides a [decorator](https://github.com/tc39/proposal-decorators) which can be used to make [dependency injection](https://docs.angularjs.org/guide/di) with [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) easier.
 
@@ -9,15 +9,8 @@ This package provides a [decorator](https://github.com/tc39/proposal-decorators)
 This package requires `babel-plugin-transform-decorators-legacy`.
 
 ```bash
-$ yarn add -D babel-plugin-transform-decorators-legacy
-$ yarn add @darkobits/ng-inject-decorator
-```
-
-or
-
-```bash
-$ npm install --save-dev babel-plugin-transform-decorators-legacy
-$ npm install --save @darkobits/ng-inject-decorator
+$ npm i -D babel-plugin-transform-decorators-legacy
+$ npm i @darkobits/ng-inject-decorator
 ```
 
 Then, update your `.babelrc` file:
