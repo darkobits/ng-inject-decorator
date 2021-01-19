@@ -46,7 +46,7 @@
     "jest": "21.x",
     "npm-run-all": "4.x",
     "rimraf": "2.x",
-    "standard-version": "4.x",
+    "standard-version": "^9.1.0",
     "watch": "1.x",
     "xo": "0.18.x"
   },
