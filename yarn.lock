@@ -83,9 +83,9 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.npmjs.org/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
-angular-mocks@^1.6.6:
-  version "1.6.6"
-  resolved "https://registry.npmjs.org/angular-mocks/-/angular-mocks-1.6.6.tgz#c93018e7838c6dc5ceaf1a6bcf9be13c830ea515"
+angular-mocks@1.6.x:
+  version "1.6.10"
+  resolved "https://registry.yarnpkg.com/angular-mocks/-/angular-mocks-1.6.10.tgz#6a139e43c461d0c9a5a1acebc91e63db16031176"
 
 angular@1.6.x:
   version "1.6.6"
@@ -4464,8 +4464,8 @@ tmp@^0.0.31:
     os-tmpdir "~1.0.1"
 
 tmpl@1.0.x:
-  version "1.0.4"
-  resolved "https://registry.npmjs.org/tmpl/-/tmpl-1.0.4.tgz#23640dd7b42d00433911140820e5cf440e521dd1"
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/tmpl/-/tmpl-1.0.5.tgz#8683e0b902bb9c20c4f726e3c0b69f36518c07cc"
 
 to-fast-properties@^1.0.3:
   version "1.0.3"
